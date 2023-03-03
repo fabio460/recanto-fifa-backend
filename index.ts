@@ -8,4 +8,4 @@ route.forEach(elem=>{
    return app.use(elem.endpoint,elem.rota)
 })
 
-app.listen(4001,()=>console.log("escutando na porta 4001"))
+app.listen(4000,()=>console.log("escutando na porta 4000"))
