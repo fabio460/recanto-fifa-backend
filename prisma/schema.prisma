@@ -15,26 +15,18 @@ model Usuario {
   nome  String
   saldo Float
   folha Float
-  elencoId String @db.ObjectId @unique
-  elenco Elenco @relation(fields: [elencoId],references: [id])
-  
+  time String?
+  jogadore Jogadore[]
 }
 
-model Elenco {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  nomeDoTime String
-  usuario Usuario?
-  jogadores Jogadores[]
-}
-
-model Jogadores {
+model Jogadore {
    id    String @id @default(auto()) @map("_id") @db.ObjectId
    label String
    Posicao String
    OVER String
    CLUBE String
-   idElenco String @db.ObjectId @unique
-   elenco Elenco @relation(fields: [idElenco],references: [id])
+   idUsuario String @db.ObjectId 
+   usuario Usuario @relation(fields: [idUsuario],references: [id],onDelete: Cascade, onUpdate: Cascade)
 }
 
 
