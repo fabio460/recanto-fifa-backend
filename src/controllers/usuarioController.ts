@@ -5,12 +5,12 @@ const prisma = new PrismaClient()
 
 
 export const getUsuario =async (req:Request,res:Response)=>{
-   const u = await  prisma.usuario.findMany({
-      include:{
-         jogadore:true
-      }
-   })
-   res.json(u)
+   // const u = await prisma.usuario.findMany({
+   //    include:{
+   //       jogadore:true
+   //    }
+   // })
+   res.json(5)
 }
 
 export const getUsuarioPoId =async (req:Request,res:Response)=>{
