@@ -10,7 +10,7 @@ export const getUsuario =async (req:Request,res:Response)=>{
    //       jogadore:true
    //    }
    // })
-   res.json(5)
+   res.json("olaaa")
 }
 
 export const getUsuarioPoId =async (req:Request,res:Response)=>{
