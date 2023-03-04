@@ -66,16 +66,50 @@ export const deletar =async (req:Request,res:Response)=>{
 
 export const atualizar =async (req:Request,res:Response)=>{
    const {id, folha, saldo, nome, time} = req.body
-   const u = await  prisma.usuario.update({
-     where:{
-       id
-     },
-     data:{
-      nome,
-      folha:parseFloat(folha),
-      saldo:parseFloat(saldo),
-      time
-     }
-   })
-   res.json(u)
+   try {
+      
+      if (!folha) {
+         const u = await  prisma.usuario.update({
+            where:{
+              id
+            },
+            data:{
+             nome,
+             saldo:parseFloat(saldo),
+             time
+            }
+          })
+          res.json(u)         
+      }
+
+      if (!saldo) {
+         const u = await  prisma.usuario.update({
+            where:{
+              id
+            },
+            data:{
+             nome,
+             folha:parseFloat(folha),
+             time
+            }
+          })
+          res.json(u)
+      }
+      if (saldo && folha) {      
+         const u = await  prisma.usuario.update({
+           where:{
+             id
+           },
+           data:{
+            nome,
+            folha:parseFloat(folha),
+            saldo:parseFloat(saldo),
+            time
+           }
+         })
+         res.json(u)
+      }
+   } catch (error) {
+      res.json(error)
+   }
 }
