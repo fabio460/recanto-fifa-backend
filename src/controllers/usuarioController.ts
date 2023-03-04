@@ -26,6 +26,19 @@ export const getUsuarioPoId =async (req:Request,res:Response)=>{
    res.json(u)
 }
 
+export const getUsuarioPeloNome =async (req:Request,res:Response)=>{
+   const {id} = req.params
+   const u = await  prisma.usuario.findMany({
+      where:{
+         nome:id
+      },
+      include:{
+         jogadore:true
+      }
+   })
+   res.json(u)
+}
+
 export const criar =async (req:Request, res:Response)=>{
    const {nome,folha,saldo,time,jogadores} = req.body
    try {
