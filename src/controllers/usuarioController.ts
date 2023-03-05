@@ -57,7 +57,8 @@ export const criar =async (req:Request, res:Response)=>{
                CLUBE:e.CLUBE,
                OVER:e.OVER,
                Posicao:e.Posicao,
-               idUsuario:p.id,               
+               idUsuario:p.id,
+               valor:0     
             }
          })
       });
