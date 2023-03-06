@@ -115,15 +115,18 @@ export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
                 usuario:true
             }
         })
+        
         const proprietarioNovo = await prisma.usuario.findUnique({
             where:{
                 id:idUsuario
             }
         })
+
         const idDoPropAntigo = proprietarioAntigo?.usuario.id
         const idDoPropNovo = idUsuario
         const saldoDoPropAntigo = proprietarioAntigo?.usuario.saldo
         const saldoDoPropNovo = proprietarioNovo?.saldo || 0
+
         await prisma.usuario.update({
             where:{
                 id:idDoPropAntigo
@@ -142,8 +145,8 @@ export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
                 saldo:saldoDoPropNovo - valor
             }
         })
-
-        const r = await prisma.jogadore.update({
+        
+        await prisma.jogadore.update({
             where:{
               id
             },  
