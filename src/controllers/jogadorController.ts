@@ -103,7 +103,7 @@ export const deletar =async (req:Request, res:Response)=>{
     }
 }
 
-export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
+export const tranferenciaMonetariaDeJogador =async (req:Request, res:Response)=>{
     const {idUsuario, id, valor} = req.body
     try {
 
@@ -115,7 +115,7 @@ export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
                 usuario:true
             }
         })
-        
+
         const proprietarioNovo = await prisma.usuario.findUnique({
             where:{
                 id:idUsuario
@@ -146,6 +146,25 @@ export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
             }
         })
         
+        res.json("transferência monetaria feita com sucesso")
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+export const tranferenciaFisicaDeJogador =async (req:Request, res:Response)=>{
+    const {idUsuario, id, valor} = req.body
+    try {
+
+        const proprietarioAntigo = await prisma.jogadore.findUnique({
+            where:{
+                id
+            },
+            include:{
+                usuario:true
+            }
+        })
+
         await prisma.jogadore.update({
             where:{
               id
@@ -155,7 +174,7 @@ export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
                valor
             }
           })
-        res.json("transferência feita com sucesso")
+        res.json("transferência fisica feita com sucesso")
     } catch (error) {
         res.json(error)
     }
