@@ -155,16 +155,6 @@ export const tranferenciaMonetariaDeJogador =async (req:Request, res:Response)=>
 export const tranferenciaFisicaDeJogador =async (req:Request, res:Response)=>{
     const {idUsuario, id, valor} = req.body
     try {
-
-        const proprietarioAntigo = await prisma.jogadore.findUnique({
-            where:{
-                id
-            },
-            include:{
-                usuario:true
-            }
-        })
-
         await prisma.jogadore.update({
             where:{
               id
