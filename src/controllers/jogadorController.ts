@@ -126,13 +126,16 @@ export const tranferenciaMonetariaDeJogador =async (req:Request, res:Response)=>
         const idDoPropNovo = idUsuario
         const saldoDoPropAntigo = proprietarioAntigo?.usuario.saldo
         const saldoDoPropNovo = proprietarioNovo?.saldo || 0
+        const folhaDoPropAntigo = proprietarioAntigo?.usuario.folha || 0
+        const folhaDoPropNovo = proprietarioNovo?.folha || 0
 
         await prisma.usuario.update({
             where:{
                 id:idDoPropAntigo
             },
             data:{
-                saldo:saldoDoPropAntigo + valor
+                saldo:saldoDoPropAntigo + valor,
+                folha: folhaDoPropAntigo - (valor*0.03)
             },
             
         })
@@ -142,7 +145,8 @@ export const tranferenciaMonetariaDeJogador =async (req:Request, res:Response)=>
                 id:idDoPropNovo
             },
             data:{
-                saldo:saldoDoPropNovo - valor
+                saldo:saldoDoPropNovo - valor,
+                folha: folhaDoPropNovo + valor*0.03
             }
         })
         
