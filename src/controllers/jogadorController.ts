@@ -154,7 +154,7 @@ export const tranferenciaMonetariaDeJogador =async (req:Request, res:Response)=>
 
 export const tranferenciaFisicaDeJogador =async (req:Request, res:Response)=>{
     const {idUsuario, id, valor} = req.body
-   
+    try {
         await prisma.jogadore.update({
             where:{
               id
@@ -165,5 +165,7 @@ export const tranferenciaFisicaDeJogador =async (req:Request, res:Response)=>{
             }
           })
         res.json("transferência fisica feita com sucesso")
- 
+    } catch (error) {
+        res.json(error)
+    }
 }
