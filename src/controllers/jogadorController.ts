@@ -72,8 +72,26 @@ export const atualizar =async (req:Request, res:Response)=>{
 }
 
 export const deletar =async (req:Request, res:Response)=>{
-    const {id} = req.body
+    const {id, valor=0} = req.body
     try {
+        const proprietarioDoJogador = await prisma.jogadore.findUnique({
+            where:{
+                id
+            },
+            include:{
+                usuario:true
+            }
+        })
+        const idDoProprietario = proprietarioDoJogador?.usuario.id
+        const saldoDoProprietario = proprietarioDoJogador?.usuario.saldo
+        await prisma.usuario.update({
+            where:{
+                id:idDoProprietario
+            },
+            data:{
+                saldo:valor + saldoDoProprietario
+            }
+        })
         const r = await prisma.jogadore.delete({
             where:{
                 id
