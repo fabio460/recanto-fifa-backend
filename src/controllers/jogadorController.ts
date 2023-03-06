@@ -88,15 +88,7 @@ export const deletar =async (req:Request, res:Response)=>{
 export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
     const {idUsuario, id, valor} = req.body
     try {
-        const r = await prisma.jogadore.update({
-          where:{
-            id
-          },  
-          data:{
-             idUsuario,
-             valor
-          }
-        })
+
         const proprietarioAntigo = await prisma.jogadore.findUnique({
             where:{
                 id
@@ -120,7 +112,8 @@ export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
             },
             data:{
                 saldo:saldoDoPropAntigo + valor
-            }
+            },
+            
         })
 
         await prisma.usuario.update({
@@ -132,7 +125,18 @@ export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
             }
         })
 
-        res.json("transferencia feita com sucesso")
+        const r = await prisma.jogadore.update({
+            where:{
+              id
+            },  
+            data:{
+               idUsuario,
+               valor
+            }
+          })
+        res.json({
+            saldoDoPropAntigo, saldoDoPropNovo
+        })
     } catch (error) {
         res.json(error)
     }
