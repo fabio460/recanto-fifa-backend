@@ -152,9 +152,7 @@ export const tranferenciaDeJogador =async (req:Request, res:Response)=>{
                valor
             }
           })
-        res.json({
-            saldoDoPropAntigo, saldoDoPropNovo
-        })
+        res.json("transferência feita com sucesso")
     } catch (error) {
         res.json(error)
     }
