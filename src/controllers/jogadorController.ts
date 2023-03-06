@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 export const criar =async (req:Request, res:Response)=>{
     const {label,CLUBE,OVER,Posicao,idUsuario,valor=0} = req.body
     try {
-        const r = await prisma.jogadore.create({
+        const r = await prisma.jogador.create({
           data:{
              label,
              CLUBE,
