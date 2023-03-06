@@ -4,7 +4,7 @@ import { jogadoresType } from "../../types"
 const prisma = new PrismaClient()
 
 export const criar =async (req:Request, res:Response)=>{
-    const {label,CLUBE,OVER,Posicao,idUsuario,valor} = req.body
+    const {label,CLUBE,OVER,Posicao,idUsuario,valor=0} = req.body
     try {
         const r = await prisma.jogadore.create({
           data:{
@@ -50,7 +50,7 @@ export const listarPorId =async (req:Request, res:Response)=>{
 }
 
 export const atualizar =async (req:Request, res:Response)=>{
-    const {label,CLUBE,OVER,Posicao,idUsuario,valor, id} = req.body
+    const {label,CLUBE,OVER,Posicao,idUsuario,valor=0, id} = req.body
     try {
         const r = await prisma.jogadore.update({
           where:{
