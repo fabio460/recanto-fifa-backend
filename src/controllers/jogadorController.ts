@@ -27,6 +27,9 @@ export const listar =async (req:Request, res:Response)=>{
         const r = await prisma.jogadore.findMany({
             include:{
                 usuario:true
+            },
+            orderBy:{
+                OVER:'asc'
             }
         })
         res.json(r)
