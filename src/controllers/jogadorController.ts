@@ -29,7 +29,7 @@ export const listar =async (req:Request, res:Response)=>{
                 usuario:true
             },
             orderBy:{
-                OVER:'asc'
+                OVER:'desc'
             }
         })
         res.json(r)

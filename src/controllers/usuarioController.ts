@@ -7,7 +7,12 @@ const prisma = new PrismaClient()
 export const getUsuario =async (req:Request,res:Response)=>{
    const u = await prisma.usuario.findMany({
       include:{
-         jogadore:true,
+         jogadore:{
+            orderBy:{
+               OVER:'desc'
+            }
+         }
+
       }
       
    })
@@ -21,7 +26,11 @@ export const getUsuarioPoId =async (req:Request,res:Response)=>{
          id
       },
       include:{
-         jogadore:true
+         jogadore:{
+            orderBy:{
+               OVER:'desc'
+            }
+         }
       }
    })
    res.json(u)
@@ -34,11 +43,16 @@ export const getUsuarioPeloNome =async (req:Request,res:Response)=>{
          nome:id
       },
       include:{
-         jogadore:true
+         jogadore:{
+            orderBy:{
+               OVER:'desc'
+            }
+         }
       }
    })
    res.json(u)
 }
+
 
 export const criar =async (req:Request, res:Response)=>{
    const {nome,folha,saldo,time,jogadores} = req.body
