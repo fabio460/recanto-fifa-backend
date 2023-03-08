@@ -17,7 +17,7 @@ model Usuario {
   folha Float
   time String?
   jogadore Jogadore[]
-  
+  registro RegistroDeAtividade[]
 }
 
 model Jogadore {
@@ -31,7 +31,16 @@ model Jogadore {
    usuario Usuario @relation(fields: [idUsuario],references: [id],onDelete: Cascade, onUpdate: Cascade)
 }
 
-model User {
+model Temporada {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  email String
+  numero Float
+}
+
+model RegistroDeAtividade{
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  nomeDeQuemFez String
+  data DateTime @updatedAt 
+  atividadeFeita String
+  idUduario String @db.ObjectId
+  usuario Usuario @relation(fields: [idUduario], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }

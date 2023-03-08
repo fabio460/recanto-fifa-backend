@@ -49,6 +49,20 @@ export const listarPorId =async (req:Request, res:Response)=>{
     }
 }
 
+export const listarPoloNome =async (req:Request, res:Response)=>{
+    const {id} = req.params
+    try {
+        const r = await prisma.jogadore.findUnique({
+            where:{
+                label:id
+            }
+        })
+        res.json(r)
+    } catch (error) {
+        res.json(error)
+    }
+}
+
 export const atualizar =async (req:Request, res:Response)=>{
     const {label,CLUBE,OVER,Posicao,idUsuario,valor=0, id} = req.body
     try {

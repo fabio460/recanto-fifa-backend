@@ -7,8 +7,9 @@ const prisma = new PrismaClient()
 export const getUsuario =async (req:Request,res:Response)=>{
    const u = await prisma.usuario.findMany({
       include:{
-         jogadore:true
+         jogadore:true,
       }
+      
    })
    res.json(u)
 }
