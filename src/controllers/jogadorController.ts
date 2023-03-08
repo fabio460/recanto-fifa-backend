@@ -55,6 +55,9 @@ export const listarPoloNome =async (req:Request, res:Response)=>{
         const r = await prisma.jogadore.findUnique({
             where:{
                 label:id
+            },
+            include:{
+                usuario:true
             }
         })
         res.json(r)
