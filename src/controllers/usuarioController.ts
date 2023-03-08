@@ -46,7 +46,7 @@ export const getUsuarioPeloNome =async (req:Request,res:Response)=>{
          jogadore:{
             orderBy:{
                OVER:'desc'
-            }
+            },
          }
       }
    })
@@ -138,6 +138,23 @@ export const atualizar =async (req:Request,res:Response)=>{
          })
          res.json(u)
       }
+   } catch (error) {
+      res.json(error)
+   }
+}
+
+export const bugado =async (req:Request,res:Response)=>{
+   const {id, bugado} = req.body
+   try {
+         const u = await  prisma.usuario.update({
+            where:{
+              id
+            },
+            data:{
+              bugado
+            }
+          })
+          res.json(u)         
    } catch (error) {
       res.json(error)
    }

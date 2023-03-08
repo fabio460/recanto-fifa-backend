@@ -18,6 +18,7 @@ model Usuario {
   time String?
   jogadore Jogadore[]
   registro RegistroDeAtividade[]
+  bugado String?
 }
 
 model Jogadore {
